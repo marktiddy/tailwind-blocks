@@ -614,12 +614,6 @@ video {
   }
 }
 
-.bg-orange-200 {
-  --bg-opacity: 1;
-  background-color: #feebc8;
-  background-color: rgba(254, 235, 200, var(--bg-opacity));
-}
-
 .bg-green-200 {
   --bg-opacity: 1;
   background-color: #c6f6d5;
@@ -640,12 +634,6 @@ video {
 
 .sticky {
   position: sticky;
-}
-
-.text-orange-700 {
-  --text-opacity: 1;
-  color: #c05621;
-  color: rgba(192, 86, 33, var(--text-opacity));
 }
 
 .text-green-700 {

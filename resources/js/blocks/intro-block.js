@@ -6,7 +6,7 @@
  */
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-import IntroBlockEdit from "./edit-intro-block";
+const { RichText } = wp.editor;
 import { prefix } from "../vars";
 /**
  * Register a Gutenberg Block.
@@ -21,42 +21,53 @@ import { prefix } from "../vars";
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
+
 registerBlockType(`${prefix}/intro-block`, {
   title: __("Introductory Block"), // Block title.
   icon: "sticky", // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: "common", // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [__("Introductory Block"), __("Intro Block")],
+  attributes: {
+    message: {
+      type: "array", //Ideal for RichText
+      source: "children", //Means we have some kind of content
+      selector: ".message-body",
+    },
+  },
 
-  /**
-   * The edit function describes the structure of your block in the context of the editor.
-   * This represents what the editor will render when the block is used.
-   *
-   * The "edit" property must be a valid function.
-   *
-   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-   *
-   * @param {Object} props Props.
-   * @returns {Mixed} JSX Component.
-   */
-  edit: IntroBlockEdit,
+  edit: (props) => {
+    const {
+      attributes: { message },
+      className,
+      setAttributes,
+    } = props;
 
-  /**
-   * The save function defines the way in which the different attributes should be combined
-   * into the final markup, which is then serialized by Gutenberg into post_content.
-   *
-   * The "save" property must be specified and must be a valid function.
-   *
-   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-   *
-   * @param {Object} props Props.
-   * @returns {Mixed} JSX Frontend HTML.
-   */
-  save: (props) => {
+    const onChangeMessage = (message) => {
+      setAttributes({ message });
+    };
+
     return (
-      <div className={props.className}>
-        <p className="p-6 bg-green-200 text-green-700">
-          This is an intro block. This text should show up on the front end.
-        </p>
+      <div className={className}>
+        <h2>{__("Call to Actions", `${prefix}-blocks`)}</h2>
+        <RichText
+          tagName="div" //This is whats replaced in the editor
+          multiline="p" //Each line is a paragraph
+          placeholder={__("Add your custom message", `${prefix}-blocks`)}
+          onChange={onChangeMessage}
+          value={message}
+        />
+      </div>
+    );
+  },
+
+  save: (props) => {
+    const {
+      attributes: { message },
+    } = props;
+    return (
+      <div>
+        <h2>{__("Call to Actions", `${prefix}-blocks`)}</h2>
+        <div class="message-body">{message}</div>
       </div>
     );
   },
