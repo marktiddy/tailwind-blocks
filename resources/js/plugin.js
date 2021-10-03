@@ -9,4 +9,4 @@
  * Webpack is compiling as the input file.
  */
 
-import './blocks/example-block.js';
+import "./blocks/intro-block.js";

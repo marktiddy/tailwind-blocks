@@ -1,20 +1,16 @@
 {
-  "name": "bricks",
+  "name": "tailwind-blocks",
   "version": "1.0.0",
-  "description": "Bricks is a WordPress starter plugin to quickly and cleanly build Gutenberg blocks with Tailwind CSS.",
-  "author": "Mojave HQ",
+  "description": "A fork of bricks this is a plugin that allows the creation of multiple tailwind based gutenberg blocks when creating custom WordPress themes.",
+  "author": "Mark Tiddy",
   "license": "MIT",
   "keywords": [
     "WordPress",
     "Plugin"
   ],
-  "homepage": "https://mojavehq.com/plugins/bricks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mojave-hq/bricks.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mojave-hq/bricks/issues"
+    "url": "git+https://github.com/marktiddy/tailwind-blocks.git"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.12.1",
