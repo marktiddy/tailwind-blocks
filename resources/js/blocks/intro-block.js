@@ -6,6 +6,7 @@
  */
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+import IntroBlockEdit from "./edit-intro-block";
 import { prefix } from "../vars";
 /**
  * Register a Gutenberg Block.
@@ -37,15 +38,7 @@ registerBlockType(`${prefix}/intro-block`, {
    * @param {Object} props Props.
    * @returns {Mixed} JSX Component.
    */
-  edit: (props) => {
-    return (
-      <div className={props.className}>
-        <p className="p-6 bg-orange-200 text-orange-700">
-          This is an intro block. This text should show up in the editor.
-        </p>
-      </div>
-    );
-  },
+  edit: IntroBlockEdit,
 
   /**
    * The save function defines the way in which the different attributes should be combined
