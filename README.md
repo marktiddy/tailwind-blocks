@@ -13,3 +13,7 @@ This plugin is built to enable you to rename and prefix your blocks for each pro
 In plugin.php change the variable prefix plugin to be whatever you like
 
 In /resources/js update the vars.js file to include your chosen prefix
+
+## Starter
+
+There is a starter block configured that uses the RichText editor and has some attributes. It's probably best to keep this as boilerplate and clone it for other blocks
