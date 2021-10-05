@@ -63,7 +63,7 @@ class CustomThemeBlocks {
             );
 
             register_block_type(
-                'copy-by-kayleigh/block',
+                $this->pluginPrefix.'/block',
                 [
                     'style'         => $this->pluginPrefix . '-style',
                     'editor_script' => $this->pluginPrefix . '-script',

@@ -6,8 +6,9 @@
  */
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { RichText, Editable, MediaUpload } = wp.editor;
-const { Button } = wp.components;
+const { RichText, Editable, MediaUpload, URLInput, ToolbarButton } = wp.editor;
+const { Button, IconButton, Tooltip, TextControl, BlockControls } =
+  wp.components;
 import { pluginPrefix } from "../vars";
 /**
  * Register a Gutenberg Block.
@@ -27,7 +28,11 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
   title: __("Introductory Block"), // Block title.
   icon: "sticky", // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: `${pluginPrefix}-blocks`,
-  keywords: [__("Introductory Block"), __("Intro Block")],
+  keywords: [
+    __("Introductory Block"),
+    __("Intro Block"),
+    __("Column Image Block"),
+  ],
   attributes: {
     title: {
       type: "string",
@@ -40,7 +45,14 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
     },
     buttonText: {
       type: "string",
-      selector: ".button-text",
+      source: "text",
+      selector: "a",
+    },
+    buttonURL: {
+      type: "string",
+      source: "attribute",
+      attribute: "href",
+      selector: "a",
     },
     imgURL: {
       type: "string",
@@ -61,7 +73,15 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
 
   edit: (props) => {
     const {
-      attributes: { title, content, imgID, imgURL, imgAlt, buttonText },
+      attributes: {
+        title,
+        content,
+        imgID,
+        imgURL,
+        imgAlt,
+        buttonText,
+        buttonURL,
+      },
       className,
       setAttributes,
       isSelected,
@@ -132,6 +152,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
               value={content}
               className={`entry-content text-center md:text-left`}
             />
+
             <RichText
               tagName="a"
               multiline={false}
@@ -149,7 +170,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
 
   save: (props) => {
     const {
-      attributes: { title, content, imgURL, imgAlt, buttonText },
+      attributes: { title, content, imgURL, imgAlt, buttonText, buttonURL },
     } = props;
     return (
       <section class={`text-gray-600 px-8 md:px-16 py-12 md:py-24`}>
@@ -168,7 +189,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
             <div class="entry-content text-center md:text-left intro-body">
               {content}
             </div>
-            <a href="" class="btn btn-small mt-8 button-text">
+            <a href={buttonURL} class="btn btn-small mt-8">
               {buttonText}
             </a>
           </div>

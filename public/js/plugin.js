@@ -24,8 +24,15 @@ var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType
 var _wp$editor = wp.editor,
     RichText = _wp$editor.RichText,
     Editable = _wp$editor.Editable,
-    MediaUpload = _wp$editor.MediaUpload;
-var Button = wp.components.Button;
+    MediaUpload = _wp$editor.MediaUpload,
+    URLInput = _wp$editor.URLInput,
+    ToolbarButton = _wp$editor.ToolbarButton;
+var _wp$components = wp.components,
+    Button = _wp$components.Button,
+    IconButton = _wp$components.IconButton,
+    Tooltip = _wp$components.Tooltip,
+    TextControl = _wp$components.TextControl,
+    BlockControls = _wp$components.BlockControls;
 
 /**
  * Register a Gutenberg Block.
@@ -50,7 +57,7 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
   icon: "sticky",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: "".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "-blocks"),
-  keywords: [__("Introductory Block"), __("Intro Block")],
+  keywords: [__("Introductory Block"), __("Intro Block"), __("Column Image Block")],
   attributes: {
     title: {
       type: "string",
@@ -66,7 +73,14 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
     },
     buttonText: {
       type: "string",
-      selector: ".button-text"
+      source: "text",
+      selector: "a"
+    },
+    buttonURL: {
+      type: "string",
+      source: "attribute",
+      attribute: "href",
+      selector: "a"
     },
     imgURL: {
       type: "string",
@@ -92,6 +106,7 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
         imgURL = _props$attributes.imgURL,
         imgAlt = _props$attributes.imgAlt,
         buttonText = _props$attributes.buttonText,
+        buttonURL = _props$attributes.buttonURL,
         className = props.className,
         setAttributes = props.setAttributes,
         isSelected = props.isSelected;
@@ -192,7 +207,8 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
         content = _props$attributes2.content,
         imgURL = _props$attributes2.imgURL,
         imgAlt = _props$attributes2.imgAlt,
-        buttonText = _props$attributes2.buttonText;
+        buttonText = _props$attributes2.buttonText,
+        buttonURL = _props$attributes2.buttonURL;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("section", {
       "class": "text-gray-600 px-8 md:px-16 py-12 md:py-24",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -213,8 +229,8 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
             "class": "entry-content text-center md:text-left intro-body",
             children: content
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "",
-            "class": "btn btn-small mt-8 button-text",
+            href: buttonURL,
+            "class": "btn btn-small mt-8",
             children: buttonText
           })]
         })]
