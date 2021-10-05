@@ -6,8 +6,9 @@
  */
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { RichText } = wp.editor;
-import { prefix } from "../vars";
+const { RichText, Editable, MediaUpload } = wp.editor;
+const { Button } = wp.components;
+import { pluginPrefix } from "../vars";
 /**
  * Register a Gutenberg Block.
  *
@@ -22,53 +23,148 @@ import { prefix } from "../vars";
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType(`${prefix}/intro-block`, {
+registerBlockType(`${pluginPrefix}/intro-block`, {
   title: __("Introductory Block"), // Block title.
   icon: "sticky", // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-  category: "common", // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  category: `${pluginPrefix}-blocks`,
   keywords: [__("Introductory Block"), __("Intro Block")],
   attributes: {
-    message: {
+    title: {
+      type: "string",
+
+      selector: ".intro-title",
+    },
+    content: {
       type: "array", //Ideal for RichText
       source: "children", //Means we have some kind of content
-      selector: ".message-body",
+      selector: ".intro-body", //The class expected on the content container
+    },
+    imgURL: {
+      type: "string",
+      source: "attribute",
+      attribute: "src",
+      selector: "img",
+    },
+    imgID: {
+      type: "number",
+    },
+    imgAlt: {
+      type: "string",
+      source: "attribute",
+      attribute: "alt",
+      selector: "img",
     },
   },
 
   edit: (props) => {
     const {
-      attributes: { message },
+      attributes: { title, content, imgID, imgURL, imgAlt },
       className,
       setAttributes,
+      isSelected,
     } = props;
 
-    const onChangeMessage = (message) => {
-      setAttributes({ message });
+    const onSelectImage = (img) => {
+      setAttributes({
+        imgID: img.id,
+        imgURL: img.url,
+        imgAlt: img.alt,
+      });
     };
-
+    const onRemoveImage = () => {
+      setAttributes({
+        imgID: null,
+        imgURL: null,
+        imgAlt: null,
+      });
+    };
     return (
-      <div className={className}>
-        <h2>{__("Call to Actions", `${prefix}-blocks`)}</h2>
-        <RichText
-          tagName="div" //This is whats replaced in the editor
-          multiline="p" //Each line is a paragraph
-          placeholder={__("Add your custom message", `${prefix}-blocks`)}
-          onChange={onChangeMessage}
-          value={message}
-        />
-      </div>
+      <section
+        className={`${className} text-gray-600 px-8 md:px-16 py-12 md:py-24`}
+      >
+        <div class="grid-cols-1 grid md:grid-cols-2 text-left">
+          <div class="flex justify-center items-center">
+            {!imgID ? (
+              <MediaUpload
+                onSelect={onSelectImage}
+                type="image"
+                value={imgID}
+                render={({ open }) => (
+                  <Button className={"button button-large"} onClick={open}>
+                    {__(" Upload Image", `${pluginPrefix}-blocks`)}
+                  </Button>
+                )}
+              ></MediaUpload>
+            ) : (
+              <>
+                <img
+                  class="object-cover object-center rounded-full h-72 w-72 border-4 border-secondary"
+                  alt={imgAlt}
+                  src={imgURL}
+                />
+                {isSelected && (
+                  <Button className="remove-image" onClick={onRemoveImage}>
+                    <i class="fa fa-times text-white bg-red-500 h-4 w-4 flex justify-center items-center rounded-full"></i>
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
+          <div class="flex justify-center items-center md:items-start flex-col mt-8 md:mt-0">
+            <RichText
+              tagName="h2" //This is whats replaced in the editor
+              placeholder={__("Your Title", `${pluginPrefix}-blocks`)}
+              onChange={(title) => setAttributes({ title })}
+              value={title}
+              className={`text-center md:text-left mb-4 font-mono text-5xl font-normal`}
+            />
+            <RichText
+              tagName="div" //This is whats replaced in the editor
+              multiline="p" //Each line is a paragraph
+              placeholder={__(
+                "Add your content here",
+                `${pluginPrefix}-blocks`
+              )}
+              onChange={(content) => setAttributes({ content })}
+              value={content}
+              className={`entry-content text-center md:text-left`}
+            />
+            <a href="" class="btn btn-small mt-8">
+              Button
+            </a>
+          </div>
+        </div>
+      </section>
     );
   },
 
   save: (props) => {
     const {
-      attributes: { message },
+      attributes: { title, content, imgURL, imgAlt },
     } = props;
     return (
-      <div>
-        <h2>{__("Call to Actions", `${prefix}-blocks`)}</h2>
-        <div class="message-body">{message}</div>
-      </div>
+      <section class={`text-gray-600 px-8 md:px-16 py-12 md:py-24`}>
+        <div class="container grid-cols-1 grid md:grid-cols-2">
+          <div class="flex justify-center items-center">
+            <img
+              class="object-cover object-center rounded-full h-72 w-72 border-4 border-secondary"
+              alt={imgAlt}
+              src={imgURL}
+            />
+          </div>
+          <div class="flex justify-center items-center md:items-start flex-col mt-8 md:mt-0">
+            <h2 class="text-center md:text-left mb-4 intro-title text-5xl font-mono">
+              {title}
+            </h2>
+            <div class="entry-content text-center md:text-left intro-body">
+              {content}
+            </div>
+            <a href="" class="btn btn-small mt-8">
+              Button
+            </a>
+          </div>
+        </div>
+      </section>
     );
   },
 });

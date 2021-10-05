@@ -1,1 +1,1 @@
-export const prefix = "tailwind-blocks";
+export const pluginPrefix = "tailwind-blocks";

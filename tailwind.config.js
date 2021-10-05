@@ -1,7 +1,12 @@
 module.exports = {
   purge: {
     enabled: true,
-    content: ["./resources/**/*.js", "./resources/**/*.jsx"],
+    content: [
+      "./resources/**/*.js",
+      "./resources/js/blocks/*.js",
+      "./resources/**/*.jsx",
+      "./resources/css/*.css",
+    ],
   },
   theme: {
     container: {
@@ -26,6 +31,7 @@ module.exports = {
       xl: "1280px",
     },
   },
+  important: true,
   variants: {},
-  plugins: [],
+  plugins: [require("postcss-import")],
 };
