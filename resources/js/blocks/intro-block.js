@@ -31,13 +31,16 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
   attributes: {
     title: {
       type: "string",
-
       selector: ".intro-title",
     },
     content: {
       type: "array", //Ideal for RichText
       source: "children", //Means we have some kind of content
       selector: ".intro-body", //The class expected on the content container
+    },
+    buttonText: {
+      type: "string",
+      selector: ".button-text",
     },
     imgURL: {
       type: "string",
@@ -58,7 +61,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
 
   edit: (props) => {
     const {
-      attributes: { title, content, imgID, imgURL, imgAlt },
+      attributes: { title, content, imgID, imgURL, imgAlt, buttonText },
       className,
       setAttributes,
       isSelected,
@@ -116,7 +119,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
               placeholder={__("Your Title", `${pluginPrefix}-blocks`)}
               onChange={(title) => setAttributes({ title })}
               value={title}
-              className={`text-center md:text-left mb-4 font-mono text-5xl font-normal`}
+              className={`text-center md:text-left mb-4 font-sans text-5xl font-normal`}
             />
             <RichText
               tagName="div" //This is whats replaced in the editor
@@ -129,9 +132,15 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
               value={content}
               className={`entry-content text-center md:text-left`}
             />
-            <a href="" class="btn btn-small mt-8">
-              Button
-            </a>
+            <RichText
+              tagName="a"
+              multiline={false}
+              allowedFormats={[]}
+              placeholder={__("Button Text", `${pluginPrefix}-blocks`)}
+              onChange={(buttonText) => setAttributes({ buttonText })}
+              value={buttonText}
+              className={`btn btn-small mt-8 text-white`}
+            />
           </div>
         </div>
       </section>
@@ -140,7 +149,7 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
 
   save: (props) => {
     const {
-      attributes: { title, content, imgURL, imgAlt },
+      attributes: { title, content, imgURL, imgAlt, buttonText },
     } = props;
     return (
       <section class={`text-gray-600 px-8 md:px-16 py-12 md:py-24`}>
@@ -153,14 +162,14 @@ registerBlockType(`${pluginPrefix}/intro-block`, {
             />
           </div>
           <div class="flex justify-center items-center md:items-start flex-col mt-8 md:mt-0">
-            <h2 class="text-center md:text-left mb-4 intro-title text-5xl font-mono">
+            <h2 class="text-center md:text-left mb-4 intro-title text-5xl font-sans">
               {title}
             </h2>
             <div class="entry-content text-center md:text-left intro-body">
               {content}
             </div>
-            <a href="" class="btn btn-small mt-8">
-              Button
+            <a href="" class="btn btn-small mt-8 button-text">
+              {buttonText}
             </a>
           </div>
         </div>

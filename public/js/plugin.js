@@ -64,6 +64,10 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
       selector: ".intro-body" //The class expected on the content container
 
     },
+    buttonText: {
+      type: "string",
+      selector: ".button-text"
+    },
     imgURL: {
       type: "string",
       source: "attribute",
@@ -87,6 +91,7 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
         imgID = _props$attributes.imgID,
         imgURL = _props$attributes.imgURL,
         imgAlt = _props$attributes.imgAlt,
+        buttonText = _props$attributes.buttonText,
         className = props.className,
         setAttributes = props.setAttributes,
         isSelected = props.isSelected;
@@ -150,7 +155,7 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
               });
             },
             value: title,
-            className: "text-center md:text-left mb-4 font-mono text-5xl font-normal"
+            className: "text-center md:text-left mb-4 font-sans text-5xl font-normal"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RichText, {
             tagName: "div" //This is whats replaced in the editor
             ,
@@ -164,10 +169,18 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
             },
             value: content,
             className: "entry-content text-center md:text-left"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "",
-            "class": "btn btn-small mt-8",
-            children: "Button"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RichText, {
+            tagName: "a",
+            multiline: false,
+            allowedFormats: [],
+            placeholder: __("Button Text", "".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "-blocks")),
+            onChange: function onChange(buttonText) {
+              return setAttributes({
+                buttonText: buttonText
+              });
+            },
+            value: buttonText,
+            className: "btn btn-small mt-8 text-white"
           })]
         })]
       })
@@ -178,7 +191,8 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
         title = _props$attributes2.title,
         content = _props$attributes2.content,
         imgURL = _props$attributes2.imgURL,
-        imgAlt = _props$attributes2.imgAlt;
+        imgAlt = _props$attributes2.imgAlt,
+        buttonText = _props$attributes2.buttonText;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("section", {
       "class": "text-gray-600 px-8 md:px-16 py-12 md:py-24",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -193,15 +207,15 @@ registerBlockType("".concat(_vars__WEBPACK_IMPORTED_MODULE_0__.pluginPrefix, "/i
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           "class": "flex justify-center items-center md:items-start flex-col mt-8 md:mt-0",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
-            "class": "text-center md:text-left mb-4 intro-title text-5xl font-mono",
+            "class": "text-center md:text-left mb-4 intro-title text-5xl font-sans",
             children: title
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
             "class": "entry-content text-center md:text-left intro-body",
             children: content
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
             href: "",
-            "class": "btn btn-small mt-8",
-            children: "Button"
+            "class": "btn btn-small mt-8 button-text",
+            children: buttonText
           })]
         })]
       })
