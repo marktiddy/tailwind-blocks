@@ -228,8 +228,8 @@ var prefix = "tailwind-blocks";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/marktiddy/Local Sites/copy-by-kayleigh/app/public/wp-content/plugins/tailwind-blocks/resources/js/plugin.js */"./resources/js/plugin.js");
-module.exports = __webpack_require__(/*! /Users/marktiddy/Local Sites/copy-by-kayleigh/app/public/wp-content/plugins/tailwind-blocks/resources/css/plugin.css */"./resources/css/plugin.css");
+__webpack_require__(/*! /Users/markwork/Local Sites/tailwind-blocks/app/public/wp-content/plugins/tailwind-blocks/resources/js/plugin.js */"./resources/js/plugin.js");
+module.exports = __webpack_require__(/*! /Users/markwork/Local Sites/tailwind-blocks/app/public/wp-content/plugins/tailwind-blocks/resources/css/plugin.css */"./resources/css/plugin.css");
 
 
 /***/ })

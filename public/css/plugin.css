@@ -593,6 +593,8 @@ video {
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 }
 
@@ -605,6 +607,8 @@ video {
 @media (min-width: 1024px) {
   .container {
     max-width: 1024px;
+    padding-right: 0rem;
+    padding-left: 0rem;
   }
 }
 
@@ -612,12 +616,6 @@ video {
   .container {
     max-width: 1280px;
   }
-}
-
-.bg-green-200 {
-  --bg-opacity: 1;
-  background-color: #c6f6d5;
-  background-color: rgba(198, 246, 213, var(--bg-opacity));
 }
 
 .block {
@@ -628,18 +626,8 @@ video {
   display: table;
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
 .sticky {
   position: sticky;
-}
-
-.text-green-700 {
-  --text-opacity: 1;
-  color: #2f855a;
-  color: rgba(47, 133, 90, var(--text-opacity));
 }
 
 @-webkit-keyframes spin {
@@ -716,6 +704,8 @@ video {
   @media (min-width: 640px) {
     .sm\:container {
       max-width: 640px;
+      padding-right: 2rem;
+      padding-left: 2rem;
     }
   }
 
@@ -728,6 +718,8 @@ video {
   @media (min-width: 1024px) {
     .sm\:container {
       max-width: 1024px;
+      padding-right: 0rem;
+      padding-left: 0rem;
     }
   }
 
@@ -746,6 +738,8 @@ video {
   @media (min-width: 640px) {
     .md\:container {
       max-width: 640px;
+      padding-right: 2rem;
+      padding-left: 2rem;
     }
   }
 
@@ -758,6 +752,8 @@ video {
   @media (min-width: 1024px) {
     .md\:container {
       max-width: 1024px;
+      padding-right: 0rem;
+      padding-left: 0rem;
     }
   }
 
@@ -776,6 +772,8 @@ video {
   @media (min-width: 640px) {
     .lg\:container {
       max-width: 640px;
+      padding-right: 2rem;
+      padding-left: 2rem;
     }
   }
 
@@ -788,6 +786,8 @@ video {
   @media (min-width: 1024px) {
     .lg\:container {
       max-width: 1024px;
+      padding-right: 0rem;
+      padding-left: 0rem;
     }
   }
 
@@ -806,6 +806,8 @@ video {
   @media (min-width: 640px) {
     .xl\:container {
       max-width: 640px;
+      padding-right: 2rem;
+      padding-left: 2rem;
     }
   }
 
@@ -818,6 +820,8 @@ video {
   @media (min-width: 1024px) {
     .xl\:container {
       max-width: 1024px;
+      padding-right: 0rem;
+      padding-left: 0rem;
     }
   }
 

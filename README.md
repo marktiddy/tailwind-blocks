@@ -22,6 +22,11 @@ There is a starter block configured that uses the RichText editor and has some a
 
 This is a useful respository for block starters - https://github.com/zgordon/gutenberg-course/tree/master/blocks
 
-## Note
+## Using this plugin alongside tailpress
 
-If you're also developing a Tailwind theme you'll want to duplicate your tailwind.config.js extensions here so they show in the editor and enqueue your fonts for the admin too.
+This adaptation of bricks has been put together to use for developing custom gutenberg blocks alongside using Tailpress for custom theme development.
+
+To use this with a Tailpress theme you will need to copy across some settings
+
+- Make sure your tailwind config file in this plugin includes any extended fonts, colors etc. This will ensure that your styles also appear in the backend.
+- You will also need to enqueue these fonts in the plugin.php file for the admin.
